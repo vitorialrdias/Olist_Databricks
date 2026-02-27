@@ -1,0 +1,608 @@
+{
+  "datasets": [
+    {
+      "name": "c268ca68",
+      "displayName": "olist_orders",
+      "queryLines": [
+        "SELECT * FROM lrd_databricks.silver.olist_orders"
+      ]
+    },
+    {
+      "name": "0af7cf2f",
+      "displayName": "olist_products",
+      "queryLines": [
+        "SELECT * FROM lrd_databricks.silver.olist_products"
+      ]
+    },
+    {
+      "name": "75e1c2b1",
+      "displayName": "agg_review_location",
+      "queryLines": [
+        "SELECT * FROM lrd_databricks.gold.agg_review_location"
+      ]
+    },
+    {
+      "name": "c88a22ea",
+      "displayName": "agg_item_location",
+      "queryLines": [
+        "SELECT * FROM lrd_databricks.gold.agg_item_location"
+      ]
+    },
+    {
+      "name": "50f44319",
+      "displayName": "agg_product_order",
+      "queryLines": [
+        "SELECT * FROM lrd_databricks.gold.agg_product_order"
+      ]
+    },
+    {
+      "name": "5d07baee",
+      "displayName": "olist_order_reviews",
+      "queryLines": [
+        "SELECT * FROM lrd_databricks.silver.olist_order_reviews"
+      ]
+    },
+    {
+      "name": "90c37e97",
+      "displayName": "olist_order_payments",
+      "queryLines": [
+        "SELECT * FROM lrd_databricks.silver.olist_order_payments"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "e623f2fc",
+      "displayName": "Olist_Dashboard",
+      "layout": [
+        {
+          "widget": {
+            "name": "sellers-per-payment-type",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "90c37e97",
+                  "fields": [
+                    {
+                      "name": "PAYMENT_TYPE",
+                      "expression": "`PAYMENT_TYPE`"
+                    },
+                    {
+                      "name": "countdistinct(ID_ORDER)",
+                      "expression": "COUNT(DISTINCT `ID_ORDER`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Payment type per Order",
+                "headerAlignment": "center"
+              },
+              "style": {
+                "fontColor": {
+                  "dark": "#FFFFFF"
+                }
+              },
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "PAYMENT_TYPE",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "countdistinct(ID_ORDER)",
+                  "axis": {
+                    "hideTitle": true
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            },
+            "specExtensions": {
+              "widgetBackgroundColor": {
+                "dark": "#000000"
+              },
+              "widgetBorderColor": {
+                "dark": "#008BFF"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 1,
+            "width": 6,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "total-customers",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c268ca68",
+                  "fields": [
+                    {
+                      "name": "countdistinct(ID_ORDER)",
+                      "expression": "COUNT(DISTINCT `ID_ORDER`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Total Orders"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "countdistinct(ID_ORDER)"
+                }
+              }
+            },
+            "specExtensions": {
+              "widgetBackgroundColor": {
+                "dark": "#000000"
+              },
+              "widgetBorderColor": {
+                "dark": "#008BFF"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 3,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "8f23091d",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0af7cf2f",
+                  "fields": [
+                    {
+                      "name": "countdistinct(ID_PRODUCT)",
+                      "expression": "COUNT(DISTINCT `ID_PRODUCT`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Total Products"
+              },
+              "style": {
+                "fontColor": {
+                  "dark": "#FFFFFF"
+                }
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "countdistinct(ID_PRODUCT)"
+                }
+              }
+            },
+            "specExtensions": {
+              "widgetBackgroundColor": {
+                "dark": "#000000"
+              },
+              "widgetBorderColor": {
+                "dark": "#008BFF"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 0,
+            "width": 3,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "category-products-per-order",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "50f44319",
+                  "fields": [
+                    {
+                      "name": "count(PRODUCT_CATEGORY)",
+                      "expression": "COUNT(`PRODUCT_CATEGORY`)"
+                    },
+                    {
+                      "name": "PRODUCT_CATEGORY",
+                      "expression": "`PRODUCT_CATEGORY`"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`PRODUCT_CATEGORY` IN (`PRODUCT_CATEGORY`) OR TRUE"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Category products per Order",
+                "headerAlignment": "center"
+              },
+              "mark": {
+                "colors": [
+                  "#AB2E22",
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "count(PRODUCT_CATEGORY)",
+                  "axis": {
+                    "hideGrid": false,
+                    "hideLabels": false,
+                    "hideTitle": true
+                  },
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 8
+                    },
+                    "significantFigures": {
+                      "type": "max",
+                      "figures": 8
+                    },
+                    "hideGroupSeparator": false
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "PRODUCT_CATEGORY",
+                  "axis": {
+                    "hideLabels": false
+                  },
+                  "scale": {
+                    "type": "categorical",
+                    "categorySize": {
+                      "type": "number-of-categories",
+                      "number": 20
+                    },
+                    "sort": {
+                      "by": "custom-order",
+                      "orderedValues": [
+                        "cama_mesa_banho",
+                        "beleza_saude",
+                        "esporte_lazer",
+                        "moveis_decoracao",
+                        "informatica_acessorios",
+                        "utilidades_domesticas",
+                        "relogios_presentes",
+                        "telefonia",
+                        "ferramentas_jardim",
+                        "automotivo",
+                        "brinquedos",
+                        "cool_stuff",
+                        "perfumaria",
+                        "bebes",
+                        "eletronicos",
+                        "papelaria",
+                        "fashion_bolsas_e_acessorios",
+                        "pet_shop",
+                        "moveis_escritorio",
+                        "consoles_games",
+                        "malas_acessorios",
+                        "construcao_ferramentas_construcao",
+                        "eletrodomesticos",
+                        "instrumentos_musicais",
+                        "eletroportateis",
+                        "casa_construcao",
+                        "livros_interesse_geral",
+                        "alimentos",
+                        "moveis_sala",
+                        "casa_conforto",
+                        "bebidas",
+                        "audio",
+                        "market_place",
+                        "construcao_ferramentas_iluminacao",
+                        "climatizacao",
+                        "moveis_cozinha_area_de_servico_jantar_e_jardim",
+                        "alimentos_bebidas",
+                        "industria_comercio_e_negocios",
+                        "livros_tecnicos",
+                        "telefonia_fixa",
+                        "fashion_calcados",
+                        "construcao_ferramentas_jardim",
+                        "eletrodomesticos_2",
+                        "agro_industria_e_comercio",
+                        "artes",
+                        "pcs",
+                        "sinalizacao_e_seguranca",
+                        "construcao_ferramentas_seguranca",
+                        "artigos_de_natal",
+                        "fashion_roupa_masculina",
+                        "fashion_underwear_e_moda_praia",
+                        "moveis_quarto",
+                        "construcao_ferramentas_ferramentas",
+                        "tablets_impressao_imagem",
+                        "portateis_casa_forno_e_cafe",
+                        "cine_foto",
+                        "dvds_blu_ray",
+                        "livros_importados",
+                        "fashion_roupa_feminina",
+                        "artigos_de_festas",
+                        "fraldas_higiene",
+                        "musica",
+                        "moveis_colchao_e_estofado",
+                        "flores",
+                        "fashion_esporte",
+                        "casa_conforto_2",
+                        "artes_e_artesanato",
+                        "portateis_cozinha_e_preparadores_de_alimentos",
+                        "la_cuisine",
+                        "cds_dvds_musicais",
+                        "pc_gamer",
+                        "fashion_roupa_infanto_juvenil",
+                        "seguros_e_servicos",
+                        null
+                      ]
+                    }
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              }
+            },
+            "specExtensions": {
+              "widgetBackgroundColor": {
+                "dark": "#000000"
+              },
+              "widgetBorderColor": {
+                "dark": "#008BFF"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 6,
+            "width": 11,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "eee2b846",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5d07baee",
+                  "fields": [
+                    {
+                      "name": "countdistinct(ID_ORDER)",
+                      "expression": "COUNT(DISTINCT `ID_ORDER`)"
+                    },
+                    {
+                      "name": "REVIEW_SCORE",
+                      "expression": "`REVIEW_SCORE`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "countdistinct(ID_ORDER)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "axis": {
+                    "hideTitle": true
+                  },
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    },
+                    "significantFigures": {
+                      "type": "max",
+                      "figures": 3
+                    },
+                    "hideGroupSeparator": false
+                  }
+                },
+                "color": {
+                  "fieldName": "REVIEW_SCORE",
+                  "legend": {
+                    "position": "top",
+                    "hideTitle": false,
+                    "hide": false,
+                    "title": ""
+                  },
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "5",
+                        "color": "#004480"
+                      },
+                      {
+                        "value": "4",
+                        "color": "#0090BC"
+                      },
+                      {
+                        "value": "1",
+                        "color": "#FFBC00"
+                      },
+                      {
+                        "value": "3",
+                        "color": "#FF6600"
+                      },
+                      {
+                        "value": "2",
+                        "color": "#D20000"
+                      }
+                    ],
+                    "sort": {
+                      "by": "angle-reversed"
+                    }
+                  }
+                },
+                "label": {
+                  "show": false
+                },
+                "extra": [
+                  {
+                    "fieldName": "REVIEW_SCORE"
+                  }
+                ]
+              }
+            },
+            "specExtensions": {
+              "widgetBackgroundColor": {
+                "dark": "#000000"
+              },
+              "widgetBorderColor": {
+                "dark": "#008BFF"
+              }
+            }
+          },
+          "position": {
+            "x": 7,
+            "y": 0,
+            "width": 5,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
