@@ -1,13 +1,34 @@
 # 🚀 Projeto Olist Databricks — Arquitetura Lakehouse
 
-Este projeto segue a arquitetura **Lakehouse** utilizando Microsoft Azure e Azure Databricks, estruturado em camadas **Bronze**, **Silver** e **Gold**.
+Este repositório apresenta um projeto construido em arquitetura **Lakehouse** utilizando Microsoft Azure e Azure Databricks, estruturado em camadas **Bronze**, **Silver** e **Gold**.
 
-Os dados são:
+## 🔍 Visão Geral do Projeto
 
-- Inseridos na camada Bronze
-- Transformados e padronizados na Silver
-- Agregados na Gold
-- Consumidos via Databricks SQL Dashboard
+O objetivo deste projeto é demonstrar um pipeline de dados end-to-end, desde a ingestão de dados brutos até a criação de outputs analíticos, utilizando:
+
+- Azure Databricks
+- PySpark / Spark SQL
+- Delta Lake
+- Unity Catalog
+- dbutils.secrets para gerenciamento seguro de credenciais
+- Armazenamento em containers no Azure Data Lake Storage (ADLS Gen2)
+
+O projeto contempla também um **job pipeline** criado no Databricks para orquestrar automaticamente a sequência de notebooks sem necessidade de geração manual de arquivos intermediários.
+
+
+## 🧱 Arquitetura – Medallion (Bronze, Silver e Gold)
+
+### 🥉 Bronze
+
+A camada Bronze é responsável pela ingestão de dados brutos da fonte original (arquivos CSV da Olist), preservando o formato original dos dados e gravando-os em formato Delta. Essa etapa garante rastreabilidade e permite reprocessamentos.
+
+### 🥈 Silver
+
+Na camada Silver, aplicam-se transformações de limpeza, padronização, normalização de tipos e outras regras de qualidade de dados, elevando a consistência dos dados e preparando-os para análises mais confiáveis.
+
+### 🥇 Gold
+
+A camada Gold agrega, resume e modela os dados prontos para consumo analítico. 
 
 ---
 
@@ -26,57 +47,6 @@ Os dados são:
 - Delta Lake como camada de armazenamento  
 
 ---
-
-# 🏗 Arquitetura do Projeto
-
-A arquitetura segue o padrão **Medallion Architecture**, dividida em três camadas:
-
----
-
-## 🥉 Camada Bronze — Dados Brutos
-
-Responsável pela aquisição dos dados sem transformação significativa.
-
-### Características:
-
-- Dados mantidos no formato original  
-- Estrutura próxima à fonte  
-- Persistência em Delta  
-- Sem aplicação de regras de negócio  
-
-### 🎯 Objetivo Técnico
-
-Garantir rastreabilidade e permitir reprocessamento futuro, sem dependência da fonte original.
-
----
-
-## 🥈 Camada Silver — Limpeza e Padronização de Dados
-
-Responsável pelo tratamento e organização dos dados.
-
-### Principais Processos:
-
-- Tratamento de valores nulos  
-- Padronização de tipos de dados  
-- Normalização de colunas  
-- Aplicação de regras de qualidade  
-- Remoção de inconsistências  
-
-### 🎯 Objetivo Técnico
-
-Disponibilizar dados confiáveis, estruturados e prontos para análise.
-
----
-
-## 🥇 Camada Gold — Métricas de Negócio
-
-Responsável pela construção das tabelas analíticas e agregações.
-
-### Exemplos de Transformações:
-
-- Agregações por avaliação  
-- Agregações por localização  
-- Agregações por produtos  
 
 ### 🎯 Objetivo Técnico
 
@@ -101,3 +71,19 @@ Relatório gerado a partir das tabelas finais (Silver e Gold).
 # 🧩 Modelagem de Dados
 
 ![Modelagem de Dados](img/Modelagem.png)
+
+
+## 🧪 Boas Práticas e Recomendações
+
+Este projeto segue práticas recomendadas em engenharia de dados, como:
+- Isolamento de camadas de dados (Medallion)  
+- Uso de Delta Lake para garantir transações ACID  
+- Governança e organização com Unity Catalog  
+- Gerenciamento de credenciais com dbutils.secrets  
+- Uso de containers no Data Lake para persistência externa  
+- Pipeline automatizado por Jobs  
+
+Essas práticas contribuem para um pipeline organizado, auditável e escalável em ambiente cloud. 
+
+---
+
