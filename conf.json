@@ -1,0 +1,12 @@
+{
+  "storage_account": "databrickslrd",
+  "raw_data": "olistdataraw",
+  "scope": "olist-scope",
+  "key": "access-key",
+  "containers": {
+    "bronze": "bronze",
+    "silver": "silver",
+    "gold": "gold",
+    "raw": "olistdataraw"
+  }
+}
