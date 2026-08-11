@@ -28,7 +28,7 @@ Na camada Silver, aplicam-se transformações de limpeza, padronização, normal
 
 ### 🥇 Gold
 
-A camada Gold agrega, resume e modela os dados prontos para consumo analítico. 
+A camada Gold agrega, resume e modela os dados prontos para consumo analítico.
 
 ---
 
@@ -36,15 +36,15 @@ A camada Gold agrega, resume e modela os dados prontos para consumo analítico.
 
 ## 🔹 Ambiente Cloud
 
-- Microsoft Azure  
-- Azure Databricks Workspace  
-- Cluster configurado com encerramento automático  
-- Container para persistência das tabelas Delta  
+- Microsoft Azure
+- Azure Databricks Workspace
+- Cluster configurado com encerramento automático
+- Container para persistência das tabelas Delta
 
 ## 🔹 Motor de Processamento
 
-- Apache Spark (PySpark / SQL)  
-- Delta Lake como camada de armazenamento  
+- Apache Spark (PySpark / SQL)
+- Delta Lake como camada de armazenamento
 
 ---
 
@@ -76,14 +76,18 @@ Relatório gerado a partir das tabelas finais (Silver e Gold).
 ## 🧪 Boas Práticas e Recomendações
 
 Este projeto segue práticas recomendadas em engenharia de dados, como:
-- Isolamento de camadas de dados (Medallion)  
-- Uso de Delta Lake para garantir transações ACID  
-- Governança e organização com Unity Catalog  
-- Gerenciamento de credenciais com dbutils.secrets  
-- Uso de containers no Data Lake para persistência externa  
-- Pipeline automatizado por Jobs  
+- Isolamento de camadas de dados (Medallion)
+- Uso de Delta Lake para garantir transações ACID
+- Governança e organização com Unity Catalog
+- Gerenciamento de credenciais com dbutils.secrets
+- Uso de containers no Data Lake para persistência externa
+- Pipeline automatizado por Jobs
 
-Essas práticas contribuem para um pipeline organizado, auditável e escalável em ambiente cloud. 
+Essas práticas contribuem para um pipeline organizado, auditável e escalável em ambiente cloud.
+
+### 🔐 Configuração e segredos
+
+Use o arquivo [conf.json](conf.json) para armazenar valores não sensíveis, como nomes de conta, containers e escopos de configuração. Mantenha credenciais e chaves em um Secret Scope do Databricks e acesse-as com `dbutils.secrets`. Consulte [SECRETS.md](SECRETS.md) para orientações básicas.
 
 ---
 

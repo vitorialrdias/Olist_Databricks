@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual env
+venv/
+env/
+.venv/
+
+# VSCode
+.vscode/
+
+# JetBrains
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Databricks / Spark
+dbfs/
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets and local config
+.env
+secrets.*
+!SECRETS.md
+local_settings.py
